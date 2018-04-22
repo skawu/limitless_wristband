@@ -6,7 +6,6 @@
 ### 二、开发环境
 <1> nrf52832 SDK    ： [nRF5_SDK_12.3.0_d7731ad](http://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.3.0_d7731ad.zip)<br>
 <2> PC 端 IDE        ： [KEIL 5.2.4](https://pan.baidu.com/s/1dFnHzGl?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=)<br>
-##### keil5 PACK 文件，安装完keil 5.24之后安装
 <3> [nRF_DeviceFamilyPack.8.11.1.pack](http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/NordicSemiconductor.nRF_DeviceFamilyPack.8.11.1.pack)<br>
 <4> 固件下载工具32位 ：[nRFgo Studio-Win32](http://www.nordicsemi.com/eng/nordic/download_resource/22286/65/59520294/30244)<br>
 <5> 固件下载工具64位 ：[nRFgo Studio-Win64](http://www.nordicsemi.com/eng/nordic/download_resource/14964/69/47337491/2447)<br>
