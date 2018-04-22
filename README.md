@@ -9,5 +9,5 @@
 <3> keil PACK       ：<br>
 <4> 固件下载工具32位 ：[nRFgo Studio-Win32](http://www.nordicsemi.com/eng/nordic/download_resource/22286/65/59520294/30244)<br>
 <5> 固件下载工具64位 ：[nRFgo Studio-Win64](http://www.nordicsemi.com/eng/nordic/download_resource/14964/69/47337491/2447)<br>
-<6> [git 32位 ](https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/Git-2.16.2-32-bit.exe)
-<7> [git 64位 ](https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/Git-2.16.2-64-bit.exe)
+<6> [git 32位 ](https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/Git-2.16.2-32-bit.exe)<br>
+<7> [git 64位 ](https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/Git-2.16.2-64-bit.exe)<br>
