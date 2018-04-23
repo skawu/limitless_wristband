@@ -22,7 +22,7 @@
 |P0.16		|D/C sel	|GPIO			|TFT_LCD		|
 |P0.17		|RESET		|GPIO			|TFT_LCD		|
 |P0.18		|CS			|GPIO			|TFT_LCD		|
-|P0.19		|LEDA		|GPIO			|TFT_LCD		|
+|P0.19		|LEDA		|PWM			|TFT_LCD		|
 |			|			|				|				|
 |P0.20		|IIC_CLK	|IIC0			|HRS3300		|
 |P0.21		|IIC_SDA	|IIC0			|HRS3300		|
@@ -30,5 +30,3 @@
 |P0.23		|VLEDA		|GPIO			|HRS3300		|
 |			|			|				|				|
 
-### 注意
-1. TFT_LCD 的 LEDA脚电流有15ma，不可直接使用NRF52832的IO口驱动。
