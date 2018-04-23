@@ -7,14 +7,14 @@
 <1> nrf52832 SDK     ： [nRF5_SDK_12.3.0_d7731ad](http://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/nRF5_SDK_12.3.0_d7731ad.zip)<br>
 <2> PC 端 IDE        ： [KEIL 5.2.4](https://pan.baidu.com/s/1dFnHzGl?errno=0&errmsg=Auth%20Login%20Sucess&&bduss=&ssnerror=0&traceid=)<br>
 <3> [nRF_DeviceFamilyPack.8.11.1.pack](http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/NordicSemiconductor.nRF_DeviceFamilyPack.8.11.1.pack)<br>
-<4>[ARM.CMSIS.4.5.0.pack](https://pan.baidu.com/s/1BWcbPdipPgTnwZpKOq-AtQ)<br>
+<4> [ARM.CMSIS.4.5.0.pack](https://pan.baidu.com/s/1BWcbPdipPgTnwZpKOq-AtQ)<br>
 <5> 固件下载工具32位 ：[nRFgo Studio-Win32](http://www.nordicsemi.com/eng/nordic/download_resource/22286/65/59520294/30244)<br>
 <6> 固件下载工具64位 ：[nRFgo Studio-Win64](http://www.nordicsemi.com/eng/nordic/download_resource/14964/69/47337491/2447)<br>
 <7> [git 32位 ](https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/Git-2.16.2-32-bit.exe)<br>
 <8> [git 64位 ](https://github.com/git-for-windows/git/releases/download/v2.16.2.windows.1/Git-2.16.2-64-bit.exe)<br>
 ### 三、 开发环境搭建
 1. 下载KEIL 5.2.4并安装，一路next，无需多言，安装成功后会弹出pack安装界面，如下图:<br>![pack安装界面](http://s6.sinaimg.cn/middle/002jmXUpzy7jUUiQTJjd5&690)<br>等待所有pack安装完成后再关闭界面 。
-2. 输入正版密钥激活KEIL或自行搜索破解方法。
+2. 输入正版密钥激活KEIL。
 3. 首次打开本项目时，会提示缺少[nRF_DeviceFamilyPack.8.11.1.pack]()和[ARM.CMSIS.4.5.0.pack]()两个文件，直接点“是”进行安装，如果网速太慢，也可通过上边的连接下载后，双击安装。<br>![pack安装](http://s2.sinaimg.cn/middle/002jmXUpzy7jUUiQBSFd1&690)
 4. 下载nRFgo Studio 软件，在安装前，为了避免jlink驱动的冲突，最好将PC上已有的jlink驱动卸载。之后一路next安装，当遇到安装jlink驱动时，选择同意即可。
 5. 如果仅仅是在本地编译代码，以上的软件已经足够。如果有意向参与到项目中来，则要下载git ,之后一路next安装即可。
