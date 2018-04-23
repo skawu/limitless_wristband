@@ -4,7 +4,7 @@
 |:----------|:----------|:--------------|:--------------|
 |P0.03		|ADC_IN2	|ADC			|battery_level	|
 |			|			|				|				|
-|P0.04		|VIBRATION	|GPIOTE			|vibration motor|
+|P0.04		|VIBRATION	|PWM			|vibration motor|
 |			|			|				|				|
 |P0.10		|SPI_CLK	|SPI0			|MPU6050		|
 |P0.11		|SPI_CS		|SPI0			|MPU6050		|
