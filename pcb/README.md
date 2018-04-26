@@ -6,10 +6,8 @@
 |			|			|				|				|
 |P0.04		|VIBRATION	|GPIOTE			|vibration motor|
 |			|			|				|				|
-|P0.10		|SPI_CLK	|SPI0			|MPU6050		|
-|P0.11		|SPI_CS		|SPI0			|MPU6050		|
-|P0.12		|SPI_MISO	|SPI0			|MPU6050		|
-|P0.13		|SPI_MOSI	|SPI0			|MPU6050		|
+|P0.20		|IIC_CLK	|IIC0			|MPU6050		|
+|P0.21		|IIC_SDA	|IIC0			|MPU6050		|
 |P0.09		|INT		|GPIOTE			|MPU6050		|
 |			|			|				|				|
 |P0.24		|SPI_CLK	|SPI1			|SPI FLASH		|
