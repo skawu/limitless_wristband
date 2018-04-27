@@ -45,10 +45,10 @@ git checkout -b dev
 7. 如果想贡献自己的代码，执行如下语句<br>
 ```
 git add .
-```<br>
+```  <br>
 ```
 git commit -m "此处写你代码更新的功能"
-```<br>
+```  <br>
 ```
 git push
 ```
