@@ -53,3 +53,13 @@ dkms.conf
 
 #build
 _build/
+
+#RTE
+RTE_Components.h
+_limitless_applcation/
+_limitless_softdevice/
+_limitless_bootloader/
+
+#project file
+*.uvoptx
+*.uvoptxj.*
