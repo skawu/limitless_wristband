@@ -17,4 +17,12 @@
 2. 输入正版密钥激活KEIL。
 3. 首次打开本项目时，会提示缺少[nRF_DeviceFamilyPack.8.11.1.pack]()和[ARM.CMSIS.4.5.0.pack]()两个文件，直接点“是”进行安装，如果网速太慢，也可通过上边的连接下载后，双击安装。<br>![pack安装](http://s2.sinaimg.cn/middle/002jmXUpzy7jUUiQBSFd1&690)
 4. 下载nRFgo Studio 软件，在安装前，为了避免jlink驱动的冲突，最好将PC上已有的jlink驱动卸载。之后一路next安装，当遇到安装jlink驱动时，选择同意即可。
-5. 如果仅仅是在本地编译代码，以上的软件已经足够。如果有意向参与到项目中来，则要下载git ,之后一路next安装即可。
+5. 如果仅仅是在本地编译代码，以上的软件已经足够。如果有意向参与到项目中来，则要下载git ,之后一路next安装即可。<br>
+
+### 四、编译、下载代码到自己的开发板
+1. 使用jlink 连接开发板和PC，通过nRFgo Studio下载蓝牙协议栈文件：<br>`limitless_wristband_application\components\softdevice\s132\hex\s132_nrf52_3.0.0_softdevice.hex`![softdevice](http://s14.sinaimg.cn/middle/002jmXUpzy7k1cui38x2d&690) <br>点击Program下载。<br>
+2. 取得代码：通过git clone 或直接下载压缩包的方式拿到整个项目代码。<br>![download ZIP](http://s4.sinaimg.cn/middle/002jmXUpzy7k17WdkSn13&690)<br>
+2. 双击打开项目工程文件：`limitless_wristband\code\limitless_wristband.uvmpw`<br>
+3. 设置[limitless_band_application]()为活动工程<br>![set active project](http://s7.sinaimg.cn/middle/002jmXUpzy7k1averaK86&690)<br>
+4. 点击编译按键，等待编译完成，出现0 errs 0warings的时候，表示顺利完成编译。<br>![build](http://s2.sinaimg.cn/middle/002jmXUpzy7k1avgpLr51&690)![result](http://s8.sinaimg.cn/middle/002jmXUpzy7k1av8ERN57&690)<br>
+5. 点击下载，完成下载。<br>![download](http://s11.sinaimg.cn/middle/002jmXUpzy7k1d8VBdE3a&690)
