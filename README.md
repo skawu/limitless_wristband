@@ -25,4 +25,32 @@
 2. 双击打开项目工程文件：`limitless_wristband\code\limitless_wristband.uvmpw`<br>
 3. 设置[limitless_band_application]()为活动工程<br>![set active project](http://s7.sinaimg.cn/middle/002jmXUpzy7k1averaK86&690)<br>
 4. 点击编译按键，等待编译完成，出现0 errs 0warings的时候，表示顺利完成编译。<br>![build](http://s2.sinaimg.cn/middle/002jmXUpzy7k1avgpLr51&690)![result](http://s8.sinaimg.cn/middle/002jmXUpzy7k1av8ERN57&690)<br>
-5. 点击下载，完成下载。<br>![download](http://s11.sinaimg.cn/middle/002jmXUpzy7k1d8VBdE3a&690)
+5. 点击下载，完成下载。<br>![download](http://s11.sinaimg.cn/middle/002jmXUpzy7k1d8VBdE3a&690)<br>
+### 五、 项目参与方式
+1. 注册github账户（假设注册用户名为“loveble”），用浏览器打开[https://github.com/liuxi1989/limitless_wristband](https://github.com/liuxi1989/limitless_wristband)。点击右上角Fork。项目会复制到自己的账户内。并得到你自己的项目地址https://github.com/loveble/limitless_wristband。
+2. 在电脑任意位置单击右键，选择[Git Bash Here]()，之后会弹出git 命令行界面
+3. 输入以下代码，克隆开源项目库到本地<br>
+```
+git clone https://github.com/loveble/limitless_wristband.git
+```
+4. 进入项目文件<br>
+```
+cd limitless_wrstband
+```
+5. 建立新的开发分支<br>
+```
+git checkout -b dev
+```
+6. 接下来就可以随心所欲开发自己的代码<br>
+7. 如果想贡献自己的代码，执行如下语句<br>
+```
+git add .
+```<br>
+```
+git commit -m "此处写你代码更新的功能"
+```<br>
+```
+git push
+```
+8. 打开https://github.com/loveble/limitless_wristband，打开[Pull Request]()标签，点击[New pull request]()<br>![new pull request](http://s1.sinaimg.cn/middle/002jmXUpzy7k1KUkveM70&690)
+9. 在随后弹出的界面中，确认代码的改变，如果无误，点击[Create pull request]()，随后填上标签，确认后，这个新的pull request 就被提交了，如果你的代码很有价值，我们就会进行代码合并，这之后，你的代码将会出现在项目库中。![new pull request](http://s16.sinaimg.cn/middle/002jmXUpzy7k1KUkVJR5f&690)
