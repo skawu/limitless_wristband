@@ -11,11 +11,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>nRF52832_xxAA</Device>
           <Vendor>Nordic Semiconductor</Vendor>
-          <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.15.0</PackID>
+          <PackID>NordicSemiconductor.nRF_DeviceFamilyPack.8.16.0</PackID>
           <PackURL>http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/</PackURL>
           <Cpu>IROM(0x00000000,0x80000) IRAM(0x20000000,0x10000) CPUTYPE("Cortex-M4") FPU2 CLOCK(64000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -330,6 +331,7 @@
             <vShortWch>0</vShortWch>
             <v6Lto>0</v6Lto>
             <v6WtE>0</v6WtE>
+            <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
               <Define>BLE_STACK_SUPPORT_REQD __HEAP_SIZE=0 SVC_INTERFACE_CALL_AS_NORMAL_FUNCTION NRF_SD_BLE_API_VERSION=3 S132 BOARD_PCA10040 NRF52_PAN_12 NRF52_PAN_15 NRF52_PAN_20 NRF52_PAN_31 NRF52_PAN_36 NRF52_PAN_51 CONFIG_GPIO_AS_PINRESET NRF52_PAN_54 NRF52_PAN_55 NRF52_PAN_58 NRF52_PAN_64 SWI_DISABLE0 SOFTDEVICE_PRESENT NRF52832 NRF52 NRF_DFU_SETTINGS_VERSION=1 NRF_DFU_DEBUG_VERSION</Define>
@@ -347,6 +349,7 @@
             <NoWarn>0</NoWarn>
             <uSurpInc>0</uSurpInc>
             <useXO>0</useXO>
+            <uClangAs>0</uClangAs>
             <VariousControls>
               <MiscControls> --cpreproc_opts=-DBLE_STACK_SUPPORT_REQD,-D__HEAP_SIZE=0,-DSVC_INTERFACE_CALL_AS_NORMAL_FUNCTION,-DNRF_SD_BLE_API_VERSION=3,-DS132,-DBOARD_PCA10040,-DNRF52_PAN_12,-DNRF52_PAN_15,-DNRF52_PAN_20,-DNRF52_PAN_31,-DNRF52_PAN_36,-DNRF52_PAN_51,-DCONFIG_GPIO_AS_PINRESET,-DNRF52_PAN_54,-DNRF52_PAN_55,-DNRF52_PAN_58,-DNRF52_PAN_64,-DSWI_DISABLE0,-DSOFTDEVICE_PRESENT,-DNRF52832,-DNRF52,-DNRF_DFU_SETTINGS_VERSION=1</MiscControls>
               <Define> BLE_STACK_SUPPORT_REQD __HEAP_SIZE=0 SVC_INTERFACE_CALL_AS_NORMAL_FUNCTION NRF_SD_BLE_API_VERSION=3 S132 BOARD_PCA10040 NRF52_PAN_12 NRF52_PAN_15 NRF52_PAN_20 NRF52_PAN_31 NRF52_PAN_36 NRF52_PAN_51 CONFIG_GPIO_AS_PINRESET NRF52_PAN_54 NRF52_PAN_55 NRF52_PAN_58 NRF52_PAN_64 SWI_DISABLE0 SOFTDEVICE_PRESENT NRF52832 NRF52 NRF_DFU_SETTINGS_VERSION=1</Define>
@@ -658,16 +661,16 @@
     <files>
       <file attr="config" category="source" condition="ARM Compiler" name="Device\Source\arm\arm_startup_nrf52.s" version="8.15.0">
         <instance index="0">RTE\Device\nRF52832_xxAA\arm_startup_nrf52.s</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.15.0" condition="nRF52832 Device and CMSIS"/>
-        <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.15.0"/>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.16.0" condition="nRF52832 Device and CMSIS"/>
+        <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.16.0"/>
         <targetInfos>
           <targetInfo name="limitless_bootloader"/>
         </targetInfos>
       </file>
       <file attr="config" category="source" name="Device\Source\system_nrf52.c" version="8.15.0">
         <instance index="0">RTE\Device\nRF52832_xxAA\system_nrf52.c</instance>
-        <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.15.0" condition="nRF52832 Device and CMSIS"/>
-        <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.15.0"/>
+        <component Cclass="Device" Cgroup="Startup" Cvendor="NordicSemiconductor" Cversion="8.16.0" condition="nRF52832 Device and CMSIS"/>
+        <package license="License\license.txt" name="nRF_DeviceFamilyPack" schemaVersion="1.3" url="http://developer.nordicsemi.com/nRF5_SDK/pieces/nRF_DeviceFamilyPack/" vendor="NordicSemiconductor" version="8.16.0"/>
         <targetInfos>
           <targetInfo name="limitless_bootloader"/>
         </targetInfos>

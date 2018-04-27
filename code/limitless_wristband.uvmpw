@@ -9,11 +9,11 @@
 
   <project>
     <PathAndName>.\limitless_wristband_bootloader\arm5_no_packs\limitless_band_bootloader.uvprojx</PathAndName>
+    <NodeIsActive>1</NodeIsActive>
   </project>
 
   <project>
     <PathAndName>.\limitless_wristband_application\limitiless_band_application.uvprojx</PathAndName>
-    <NodeIsActive>1</NodeIsActive>
   </project>
 
 </ProjectWorkspace>
