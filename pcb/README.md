@@ -17,11 +17,11 @@
 |P0.26		|SPI_MISO	|SPI1			|SPI FLASH		|
 |P0.27		|SPI_MOSI	|SPI1			|SPI FLASH		|
 |			|			|				|				|
-|P0.14		|IIC_CLK	|IIC1			|TFT_LCD		|
-|P0.15		|IIC_SDA	|IIC1			|TFT_LCD		|
+|P0.14		|SPI_CLK	|SPI2			|TFT_LCD		|
+|P0.15		|SPI_MOSI	|SPI2			|TFT_LCD		|
 |P0.16		|D/C sel	|GPIO			|TFT_LCD		|
 |P0.17		|RESET		|GPIO			|TFT_LCD		|
-|P0.18		|CS			|GPIO			|TFT_LCD		|
+|P0.18		|SPI_CS		|GPIO			|TFT_LCD		|
 |P0.19		|LEDA		|PWM			|TFT_LCD		|
 |			|			|				|				|
 |P0.12		|IIC_CLK	|IIC0			|HRS3300		|

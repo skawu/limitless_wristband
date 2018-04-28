@@ -43,14 +43,10 @@ git checkout -b dev
 ```
 6. 接下来就可以随心所欲开发自己的代码<br>
 7. 如果想贡献自己的代码，执行如下语句<br>
-```
+<pre>
 git add .
-```  <br>
-```
 git commit -m "此处写你代码更新的功能"
-```  <br>
-```
 git push
-```
+</pre>
 8. 打开https://github.com/loveble/limitless_wristband，打开[Pull Request]()标签，点击[New pull request]()<br>![new pull request](http://s1.sinaimg.cn/middle/002jmXUpzy7k1KUkveM70&690)
 9. 在随后弹出的界面中，确认代码的改变，如果无误，点击[Create pull request]()，随后填上标签，确认后，这个新的pull request 就被提交了，如果你的代码很有价值，我们就会进行代码合并，这之后，你的代码将会出现在项目库中。![new pull request](http://s16.sinaimg.cn/middle/002jmXUpzy7k1KUkVJR5f&690)
