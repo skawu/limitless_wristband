@@ -2149,7 +2149,7 @@
 // <e> SPI_ENABLED - nrf_drv_spi - SPI/SPIM peripheral driver
 //==========================================================
 #ifndef SPI_ENABLED
-#define SPI_ENABLED 0
+#define SPI_ENABLED 1
 #endif
 #if  SPI_ENABLED
 // <o> SPI_DEFAULT_CONFIG_IRQ_PRIORITY  - Interrupt priority
@@ -2232,7 +2232,7 @@
 // <e> SPI2_ENABLED - Enable SPI2 instance
 //==========================================================
 #ifndef SPI2_ENABLED
-#define SPI2_ENABLED 0
+#define SPI2_ENABLED 1
 #endif
 #if  SPI2_ENABLED
 // <q> SPI2_USE_EASY_DMA  - Use EasyDMA
@@ -2255,7 +2255,7 @@
 // <e> SPI_CONFIG_LOG_ENABLED - Enables logging in the module.
 //==========================================================
 #ifndef SPI_CONFIG_LOG_ENABLED
-#define SPI_CONFIG_LOG_ENABLED 0
+#define SPI_CONFIG_LOG_ENABLED 1
 #endif
 #if  SPI_CONFIG_LOG_ENABLED
 // <o> SPI_CONFIG_LOG_LEVEL  - Default Severity level
