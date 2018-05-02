@@ -17,4 +17,36 @@
 2. 输入正版密钥激活KEIL。
 3. 首次打开本项目时，会提示缺少[nRF_DeviceFamilyPack.8.11.1.pack]()和[ARM.CMSIS.4.5.0.pack]()两个文件，直接点“是”进行安装，如果网速太慢，也可通过上边的连接下载后，双击安装。<br>![pack安装](http://s2.sinaimg.cn/middle/002jmXUpzy7jUUiQBSFd1&690)
 4. 下载nRFgo Studio 软件，在安装前，为了避免jlink驱动的冲突，最好将PC上已有的jlink驱动卸载。之后一路next安装，当遇到安装jlink驱动时，选择同意即可。
-5. 如果仅仅是在本地编译代码，以上的软件已经足够。如果有意向参与到项目中来，则要下载git ,之后一路next安装即可。
+5. 如果仅仅是在本地编译代码，以上的软件已经足够。如果有意向参与到项目中来，则要下载git ,之后一路next安装即可。<br>
+
+### 四、编译、下载代码到自己的开发板
+1. 使用jlink 连接开发板和PC，通过nRFgo Studio下载蓝牙协议栈文件：<br>`limitless_wristband_application\components\softdevice\s132\hex\s132_nrf52_3.0.0_softdevice.hex`![softdevice](http://s14.sinaimg.cn/middle/002jmXUpzy7k1cui38x2d&690) <br>点击Program下载。<br>
+2. 取得代码：通过git clone 或直接下载压缩包的方式拿到整个项目代码。<br>![download ZIP](http://s4.sinaimg.cn/middle/002jmXUpzy7k17WdkSn13&690)<br>
+2. 双击打开项目工程文件：`limitless_wristband\code\limitless_wristband.uvmpw`<br>
+3. 设置[limitless_band_application]()为活动工程<br>![set active project](http://s7.sinaimg.cn/middle/002jmXUpzy7k1averaK86&690)<br>
+4. 点击编译按键，等待编译完成，出现0 errs 0warings的时候，表示顺利完成编译。<br>![build](http://s2.sinaimg.cn/middle/002jmXUpzy7k1avgpLr51&690)![result](http://s8.sinaimg.cn/middle/002jmXUpzy7k1av8ERN57&690)<br>
+5. 点击下载，完成下载。<br>![download](http://s11.sinaimg.cn/middle/002jmXUpzy7k1d8VBdE3a&690)<br>
+### 五、 项目参与方式
+1. 注册github账户（假设注册用户名为“loveble”），用浏览器打开[https://github.com/liuxi1989/limitless_wristband](https://github.com/liuxi1989/limitless_wristband)。点击右上角Fork。项目会复制到自己的账户内。并得到你自己的项目地址https://github.com/loveble/limitless_wristband。
+2. 在电脑任意位置单击右键，选择[Git Bash Here]()，之后会弹出git 命令行界面
+3. 输入以下代码，克隆开源项目库到本地<br>
+```
+git clone https://github.com/loveble/limitless_wristband.git
+```
+4. 进入项目文件<br>
+```
+cd limitless_wrstband
+```
+5. 建立新的开发分支<br>
+```
+git checkout -b dev
+```
+6. 接下来就可以随心所欲开发自己的代码<br>
+7. 如果想贡献自己的代码，执行如下语句<br>
+<pre>
+git add .
+git commit -m "此处写你代码更新的功能"
+git push
+</pre>
+8. 打开https://github.com/loveble/limitless_wristband，打开[Pull Request]()标签，点击[New pull request]()<br>![new pull request](http://s1.sinaimg.cn/middle/002jmXUpzy7k1KUkveM70&690)
+9. 在随后弹出的界面中，确认代码的改变，如果无误，点击[Create pull request]()，随后填上标签，确认后，这个新的pull request 就被提交了，如果你的代码很有价值，我们就会进行代码合并，这之后，你的代码将会出现在项目库中。![new pull request](http://s16.sinaimg.cn/middle/002jmXUpzy7k1KUkVJR5f&690)
