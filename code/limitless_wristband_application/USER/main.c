@@ -82,6 +82,8 @@
 //wb include 
 #include "wb_pin_map.h"
 
+#include "oled_drv.h"
+
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                /**< Include the Service Changed characteristic. If not enabled, the server's database cannot be changed for the lifetime of the device. */
 
 #if (NRF_SD_BLE_API_VERSION == 3)
@@ -1049,7 +1051,8 @@ static void ble_stack_thread(void * arg)
     services_init();
     sensor_simulator_init();
     conn_params_init();
-		resources_init();
+	resources_init();
+	oled_init();
 
     application_timers_start();
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);
