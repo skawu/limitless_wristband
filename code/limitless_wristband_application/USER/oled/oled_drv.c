@@ -9,7 +9,7 @@
 #include "nrf_log_ctrl.h"
 
 
-#define OLED_SPI_INSTANCE 				2		// SPI实例定义
+#define USE_HARDWARE_SPI
 
 #define SPI2_CONFIG_SCK_PIN			22 // 14		// SPI2 SCK引脚定义
 #define SPI2_CONFIG_MOSI_PIN		23 // 15		// SPI2 MOSI引脚定义
@@ -18,7 +18,7 @@
 #define OLED_GPIO_CS		25 // 18
 #define OLED_GPIO_DC		26 // 16
 #define OLED_GPIO_REST		24 // 17
-#define OLED_GPIO_LED_PWM	27 //19
+#define OLED_GPIO_LED_PWM	27 // 19
 
 // 宏定义实现GPIO的高低控制
 #define OLED_GPIO_CS_HIGH()			nrf_gpio_pin_set(OLED_GPIO_CS)
@@ -27,26 +27,70 @@
 #define OLED_GPIO_DC_DAT()			nrf_gpio_pin_set(OLED_GPIO_DC)
 #define OLED_GPIO_DC_CMD()			nrf_gpio_pin_clear(OLED_GPIO_DC)
 
+#ifndef USE_HARDWARE_SPI
 #define OLED_GPIO_SCK_HIGH()		nrf_gpio_pin_set(SPI2_CONFIG_SCK_PIN)
 #define OLED_GPIO_SCK_LOW()			nrf_gpio_pin_clear(SPI2_CONFIG_SCK_PIN)
 
 #define OLED_GPIO_SDA_HIGH()		nrf_gpio_pin_set(SPI2_CONFIG_MOSI_PIN)
 #define OLED_GPIO_SDA_LOW()			nrf_gpio_pin_clear(SPI2_CONFIG_MOSI_PIN)
+#endif
 
 // RESET low active
 #define OLED_GPIO_REST_HIGH()		nrf_gpio_pin_set(OLED_GPIO_REST)
 #define OLED_GPIO_REST_LOW()		nrf_gpio_pin_clear(OLED_GPIO_REST)
 
+#ifdef USE_HARDWARE_SPI
+#define SPI_INSTANCE 				2		// SPI实例定义
+#define SPI2_CONFIG_IRQ_PRIORITY	APP_IRQ_PRIORITY_LOW	// SPI2中断优先级
+static volatile bool spi2_xfer_done;  /**< Flag used to indicate that SPI2 instance completed the transfer. */		
+		
+static const nrf_drv_spi_t m_spi_master_2 = NRF_DRV_SPI_INSTANCE(SPI_INSTANCE);		
+  		  
+static uint8_t rx_byte;
 
+void spi2_event_handler(nrf_drv_spi_evt_t const * p_event)		
+ {		
+     spi2_xfer_done = true;		
+     NRF_LOG_INFO("Transfer completed.\r\n");		
+ }		
+ 		
+ static void spi_config(void)		
+ {
+	 nrf_drv_spi_config_t config = NRF_DRV_SPI_DEFAULT_CONFIG;
+	 config.ss_pin = NRF_DRV_SPI_PIN_NOT_USED;
+	 config.sck_pin = SPI2_CONFIG_SCK_PIN;		
+	 config.mosi_pin = SPI2_CONFIG_MOSI_PIN;
+	 config.frequency = NRF_DRV_SPI_FREQ_4M;		
+	 config.mode = NRF_DRV_SPI_MODE_0;
+	 config.bit_order = NRF_DRV_SPI_BIT_ORDER_MSB_FIRST;		
 
+	 APP_ERROR_CHECK(nrf_drv_spi_init(&m_spi_master_2, &config, spi2_event_handler));		
+ }
+ 
+ static void spi2_oled_send_byte(uint8_t byte)		
+ {
+	 spi2_xfer_done = false;
+
+	 APP_ERROR_CHECK(nrf_drv_spi_transfer(&m_spi_master_2, &byte, 1, &rx_byte, 0));		
+ 			
+	while (!spi2_xfer_done)
+	{		
+		__WFE();		
+	}						
+ }
+
+#endif
+ 
 static void oled_gpio_init(void)
 {
 	nrf_gpio_cfg_output(OLED_GPIO_CS);
 	nrf_gpio_cfg_output(OLED_GPIO_REST);
 	nrf_gpio_cfg_output(OLED_GPIO_DC);
 	nrf_gpio_cfg_output(OLED_GPIO_LED_PWM);
+#ifndef USE_HARDWARE_SPI
 	nrf_gpio_cfg_output(SPI2_CONFIG_SCK_PIN);
-	nrf_gpio_cfg_output(SPI2_CONFIG_MOSI_PIN);
+	nrf_gpio_cfg_output(SPI2_CONFIG_MOSI_PIN);	
+#endif
 }
 
 static void oled_gpio_pwm_init(void)
@@ -58,6 +102,7 @@ static void oled_gpio_pwm_init(void)
 
 static void LCD_WriteCommand(uint8_t c)
 {
+#ifndef USE_HARDWARE_SPI
 	char i;
 	OLED_GPIO_CS_LOW();
 	OLED_GPIO_DC_CMD();
@@ -67,12 +112,18 @@ static void LCD_WriteCommand(uint8_t c)
 		if(c & 0x80) OLED_GPIO_SDA_HIGH();
 		else OLED_GPIO_SDA_LOW();
 		OLED_GPIO_SCK_HIGH();
-		c = c<<=1;
+		c <<= 1;
 	}
+#else
+	OLED_GPIO_CS_LOW();
+  	OLED_GPIO_DC_CMD();
+	spi2_oled_send_byte(c);
+#endif
 }
 
 static void LCD_WriteData(uint8_t dat)
 {
+#ifndef USE_HARDWARE_SPI
 	char i;
 	OLED_GPIO_CS_LOW();
 	OLED_GPIO_DC_DAT();
@@ -82,8 +133,13 @@ static void LCD_WriteData(uint8_t dat)
 		if(dat & 0x80) OLED_GPIO_SDA_HIGH();
 		else OLED_GPIO_SDA_LOW();
 		OLED_GPIO_SCK_HIGH();
-		dat = dat<<=1;
+		dat <<= 1;
 	}
+#else
+	OLED_GPIO_CS_LOW();
+  	OLED_GPIO_DC_DAT();
+	spi2_oled_send_byte(dat);
+#endif
 }
 
 void Delay(int count)   /* X10ms */
@@ -108,6 +164,10 @@ void oled_init(void)
 {
 	oled_gpio_init();
 	oled_gpio_pwm_init();
+	
+#ifdef USE_HARDWARE_SPI
+	spi_config();
+#endif
 
 // ST7735S RESET Sequence
 	OLED_GPIO_REST_HIGH();
@@ -215,7 +275,8 @@ void oled_init(void)
 	LCD_WriteCommand(0x29);		// Display on
 
 
-	oled_wirte_box(0, WIDTH, 0, HEIGHT, BLACK);		// 初始化清屏为黑色
+	oled_wirte_box(0, WIDTH, 0, HEIGHT, RED);		// 初始化清屏为黑色
+	oled_wirte_box(30, 50, 70, 90, GREEN);
 }
 
 static void oled_set_window(uint8_t start_x, uint8_t end_x,

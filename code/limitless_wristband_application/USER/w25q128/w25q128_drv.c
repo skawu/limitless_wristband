@@ -48,7 +48,7 @@ static void spi_config(void)
 	NRF_LOG_INFO("SPI2 init.\r\n");
 
 	nrf_drv_spi_config_t config = NRF_DRV_SPI_DEFAULT_CONFIG;
-	config.sck_pin = FLASH_GPIO_CS;
+	config.ss_pin = NRF_DRV_SPI_PIN_NOT_USED;
 	config.sck_pin = FLASH_GPIO_CLK;
 	config.mosi_pin = FLASH_GPIO_MOSI;
 	config.miso_pin = FLASH_GPIO_MISO;
