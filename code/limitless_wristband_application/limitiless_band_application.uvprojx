@@ -10,7 +10,8 @@
       <TargetName>limitless_applcation</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060300::V5.06 update 3 (build 300)::ARMCC</pCCUsed>
+      <pCCUsed>5060528::V5.06 update 5 (build 528)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>nRF52832_xxAA</Device>
@@ -2694,6 +2695,11 @@
               <FileType>1</FileType>
               <FilePath>.\USER\oled\oled_drv.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\oled\gui_drv.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2855,6 +2861,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060183::V5.06 update 2 (build 183)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>nRF52832_xxAA</Device>
@@ -6236,6 +6243,11 @@
               <FileName>oled_drv.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\USER\oled\oled_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\oled\gui_drv.c</FilePath>
             </File>
           </Files>
         </Group>

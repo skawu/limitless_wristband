@@ -1,12 +1,19 @@
+/*
+ *	file: oled_drv.c
+ *	describe: 0.96 OLED驱动文件，包括
+ *				1、硬件驱动ST7735S的初始化
+ *				2、硬件操作的实现--写命令、写数据
+ *				4、画点函数接口
+ *				5、对一块区域涂色函数接口
+ *				6、设置显示区域函数接口
+ *	import：此文件函数接口只对gui开放，系统其它部分不应调用此文件中的任何接口
+ */
+
 #include "oled_drv.h"
 #include "nrf_drv_spi.h"
 #include "nrf_gpio.h"
-#include "app_util_platform.h"
-#include "FreeRTOS.h"
-
-#define NRF_LOG_MODULE_NAME "OLED"
-#include "nrf_log.h"
-#include "nrf_log_ctrl.h"
+//#include "app_util_platform.h"
+//#include "FreeRTOS.h"
 
 
 #define USE_HARDWARE_SPI
@@ -50,8 +57,7 @@ static uint8_t rx_byte;
 
 void spi2_event_handler(nrf_drv_spi_evt_t const * p_event)		
  {		
-     spi2_xfer_done = true;		
-     NRF_LOG_INFO("Transfer completed.\r\n");		
+     spi2_xfer_done = true;				
  }		
  		
  static void spi_config(void)		
@@ -100,7 +106,7 @@ static void oled_gpio_pwm_init(void)
 }
 
 
-static void LCD_WriteCommand(uint8_t c)
+void LCD_WriteCommand(uint8_t c)
 {
 #ifndef USE_HARDWARE_SPI
 	char i;
@@ -121,7 +127,7 @@ static void LCD_WriteCommand(uint8_t c)
 #endif
 }
 
-static void LCD_WriteData(uint8_t dat)
+void LCD_WriteData(uint8_t dat)
 {
 #ifndef USE_HARDWARE_SPI
 	char i;
@@ -150,7 +156,7 @@ void Delay(int count)   /* X10ms */
 }
 
 /* 写像素数据 16bit */
-static void LCD_Write_Data(uint16_t dat16)
+void LCD_Write_Data(uint16_t dat16)
 {
 	LCD_WriteData((uint8_t)((dat16 & 0xff00) >> 8));
 	LCD_WriteData((uint8_t)(dat16 & 0x00ff));
@@ -273,13 +279,9 @@ void oled_init(void)
 	LCD_WriteData(0x05);
 	
 	LCD_WriteCommand(0x29);		// Display on
-
-
-	oled_wirte_box(0, WIDTH, 0, HEIGHT, RED);		// 初始化清屏为黑色
-	oled_wirte_box(30, 50, 70, 90, GREEN);
 }
 
-static void oled_set_window(uint8_t start_x, uint8_t end_x,
+void oled_set_window(uint8_t start_x, uint8_t end_x,
                             uint8_t start_y, uint8_t end_y)
 {
 	start_x = start_x + 24;		// X轴方向有 24 pixel的补偿值
@@ -299,14 +301,6 @@ static void oled_set_window(uint8_t start_x, uint8_t end_x,
 
 	LCD_WriteCommand(0x2C);
 }
-
-
-/*
- *	字符显示格式定义：
- *	1、列行式。即一列一列的扫描显示字符，扫描（16）列
- *	2、阴码。
-*	3、汉字为 16 * 16
- */
 
 /*
  * OLED画点函数
