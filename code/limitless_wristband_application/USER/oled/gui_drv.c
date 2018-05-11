@@ -20,6 +20,7 @@
 #include "gui_drv.h"
 #include "oled_drv.h"
 #include "asciicode.h"
+#include <stdio.h>
 
 
 /* 清屏 */
@@ -33,8 +34,8 @@ void GUI_init(void)
 {
 	oled_init();
 	GUI_clear();
-	GUI_showImage(20, 20, (uint8_t *)gImage_bt);
-//	GUI_Show12ASCII(0, 0, " zhe shi sha yan  se ?", WHITE, BLACK);
+	GUI_showImage(0, 0, (uint8_t *)gImage_10);	
+	GUI_Show12ASCII(20, 10, " Bpm ", BLUE, BLACK);
 }
 
 /****************************************************************************
@@ -227,21 +228,10 @@ void GUI_showImage(uint8_t StartX,uint8_t StartY, uint8_t *pic)
 	x=((uint16_t)(pic[2]<<8)+pic[3])-1;     //从图像数组里取出图像的长度  
 	y=((uint16_t)(pic[4]<<8)+pic[5])-1;     //从图像数组里取出图像的高度 
 	
-	LCD_WriteCommand(0x2A);
-	//设置列地址
-	LCD_WriteData(0x00);
-	LCD_WriteData(StartX);
-	LCD_WriteData(0x00);
-	LCD_WriteData(StartX + x);
-
-	LCD_WriteCommand(0x2B);
-	//设置行地址
-	LCD_WriteData(0x00);
-	LCD_WriteData(StartY);
-	LCD_WriteData(0x00);
-	LCD_WriteData(StartY + y);
 	
-	LCD_WriteCommand(0x2C);
+	
+	
+	oled_set_window(StartX, StartX + x, StartY, StartY + y);
 	
 	len=2*((uint16_t)(pic[2]<<8)+pic[3])*((uint16_t)(pic[4]<<8)+pic[5]);   //计算出图像所占的字节数  
 	

@@ -13,7 +13,8 @@ void GUI_init(void);
 extern void GUI_Show12ASCII(uint16_t x, uint16_t y, uint8_t *p, uint16_t wordColor, uint16_t backColor);
 extern void GUI_showImage(uint8_t StartX, uint8_t StartY, uint8_t *pic);
 
-
-
+extern const unsigned char gImage_000[];
+extern const unsigned char gImage_001[];
+extern const unsigned char gImage_002[];
 
 #endif
