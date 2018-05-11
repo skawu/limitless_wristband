@@ -18,14 +18,14 @@
 
 #define USE_HARDWARE_SPI
 
-#define SPI2_CONFIG_SCK_PIN			22 // 14		// SPI2 SCK引脚定义
-#define SPI2_CONFIG_MOSI_PIN		23 // 15		// SPI2 MOSI引脚定义
+#define SPI2_CONFIG_SCK_PIN			14 		// 22 // 14		// SPI2 SCK引脚定义
+#define SPI2_CONFIG_MOSI_PIN		15 		// 23 // 15		// SPI2 MOSI引脚定义
 
 /* LCD GPIO 相关配置 */
-#define OLED_GPIO_CS		25 // 18
-#define OLED_GPIO_DC		26 // 16
-#define OLED_GPIO_REST		24 // 17
-#define OLED_GPIO_LED_PWM	27 // 19
+#define OLED_GPIO_CS				18 		// 25 // 18
+#define OLED_GPIO_DC				16 		// 26 // 16
+#define OLED_GPIO_REST				17 		// 24 // 17
+#define OLED_GPIO_LED_PWM			19 		// 27 // 19
 
 // 宏定义实现GPIO的高低控制
 #define OLED_GPIO_CS_HIGH()			nrf_gpio_pin_set(OLED_GPIO_CS)
