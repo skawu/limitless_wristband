@@ -83,6 +83,7 @@
 #include "wb_pin_map.h"
 
 #include "gui_drv.h"
+#include "w25q128_drv.h"
 
 #define IS_SRVC_CHANGED_CHARACT_PRESENT  1                                /**< Include the Service Changed characteristic. If not enabled, the server's database cannot be changed for the lifetime of the device. */
 
@@ -1038,6 +1039,7 @@ static void ble_stack_thread(void * arg)
 {
     uint32_t err_code;
     bool     erase_bonds;
+	uint16_t flash_id = 0;
 
     UNUSED_PARAMETER(arg);
 
@@ -1053,6 +1055,9 @@ static void ble_stack_thread(void * arg)
     conn_params_init();
 	resources_init();
 	GUI_init();
+	spi_config();
+	flash_id = W25Qxx_ReadID();
+	GUI_Show12ASCII(20, 20, (uint8_t *)&flash_id, WHITE, BLACK);
 
     application_timers_start();
     err_code = ble_advertising_start(BLE_ADV_MODE_FAST);

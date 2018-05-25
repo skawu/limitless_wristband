@@ -1,18 +1,13 @@
 #ifndef _OLED_DRV_H_
 #define _OLED_DRV_H_
 
-#include "stdint.h"
+#include "nrf_drv_spi.h"
+#include "nrf_gpio.h"
 
 #define HEIGHT	159
 #define WIDTH	79
 
-#define RED     0xf800
-#define GREEN   0x07e0
-#define BLUE   0x001f
-#define YELLOW 0xffe0
-#define WHITE   0xffff
-#define BLACK   0x0000
-#define PURPLE 0xf81f
+
 
 extern void oled_init(void);
 extern void LCD_WriteData(uint8_t dat);

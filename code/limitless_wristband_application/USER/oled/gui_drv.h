@@ -3,6 +3,14 @@
 
 #include <stdint.h>
 
+#define RED     0xf800
+#define GREEN   0x07e0
+#define BLUE   	0x001f
+#define YELLOW 	0xffe0
+#define WHITE   0xffff
+#define BLACK   0x0000
+#define PURPLE 	0xf81f
+
 /* 设置字库地址 */
 #define GUI_FLASH_ASCII_ADDR     6112846  //ASCII字库首地址（6114304 - 1456 - 2）
 #define GUI_FLASH_12CHAR_ADDR    6114304  //12号字库首地址（6880386 - 766080 - 2）

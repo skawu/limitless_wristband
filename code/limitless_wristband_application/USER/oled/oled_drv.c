@@ -10,8 +10,7 @@
  */
 
 #include "oled_drv.h"
-#include "nrf_drv_spi.h"
-#include "nrf_gpio.h"
+
 //#include "app_util_platform.h"
 //#include "FreeRTOS.h"
 
