@@ -185,8 +185,7 @@ void W25Qxx_Read(uint8_t *pBuffer, uint32_t ReadAddr, uint8_t DataLen)
 // 擦除整个芯片
 void W25Qxx_Erase_Chip(void)
 {
-	W25Qxx_Write_Enable();
-	
+	W25Qxx_Write_Enable();	
 	W25Qxx_Wait_Busy();
 	
 	m_tx_buf[0] = W25Qxx_ChipErase;
@@ -198,7 +197,17 @@ void W25Qxx_Erase_Chip(void)
 // 擦除一个扇区
 void W25Qxx_Erase_Sector(uint32_t Addr)
 {
+	Addr *= 4096;
+	W25Qxx_Write_Enable();	
+	W25Qxx_Wait_Busy();
 	
+	m_tx_buf[0] = W25Qxx_SectorErase;
+	m_tx_buf[1] = (uint8_t)(Addr >> 16);
+	m_tx_buf[2] = (uint8_t)(Addr >> 8);
+	m_tx_buf[3] = (uint8_t)Addr;
+	spi1_flash_Wite_Read(m_tx_buf, 4, NULL, 0);
+	
+	W25Qxx_Wait_Busy();		// 等待擦除完成
 	
 }
 
