@@ -3,9 +3,6 @@
 #include "app_util_platform.h"
 #include "FreeRTOS.h"
 
-#include "nrf_log.h"
-#include "nrf_log_ctrl.h"
-
 /*
  *	</ w25q128 硬件相关定义
  */
@@ -14,6 +11,10 @@
  #define FLASH_GPIO_MOSI	27
  #define FLASH_GPIO_MISO	26
  
+ // 宏定义实现GPIO的高低控制
+#define FLASH_GPIO_CS_HIGH()			nrf_gpio_pin_set(FLASH_GPIO_CS)
+#define FLASH_GPIO_CS_LOW()				nrf_gpio_pin_clear(FLASH_GPIO_CS)
+
  /* </ end w25q128 硬件相关定义 */
 
 /*
@@ -38,15 +39,12 @@ static uint8_t       m_rx_buf[260];    		/**< RX buffer. */
 void spi1_event_handler(nrf_drv_spi_evt_t const * p_event)
 {
 	spi1_xfer_done = true;
-	NRF_LOG_INFO("Transfer completed.\r\n");
 }
 
 void spi_config(void)
 {
-	NRF_LOG_INFO("SPI2 init.\r\n");
-
 	nrf_drv_spi_config_t config = NRF_DRV_SPI_DEFAULT_CONFIG;
-	config.ss_pin = FLASH_GPIO_CS;
+//	config.ss_pin = FLASH_GPIO_CS;
 	config.sck_pin = FLASH_GPIO_CLK;
 	config.mosi_pin = FLASH_GPIO_MOSI;
 	config.miso_pin = FLASH_GPIO_MISO;
@@ -66,7 +64,6 @@ void FLASH_spi_close(void)
 /* </ FLASH SPI 读写 */
 static void spi1_flash_Wite_Read(uint8_t *tx_dat, uint8_t tx_len, uint8_t *rx_dat, uint8_t rx_len)
 {
-	NRF_LOG_INFO("SPI1 transfer.\r\n");
 	spi1_xfer_done = false;
 
 	APP_ERROR_CHECK(nrf_drv_spi_transfer(&m_spi_master_1, tx_dat, tx_len, rx_dat, rx_len + tx_len));
@@ -74,8 +71,6 @@ static void spi1_flash_Wite_Read(uint8_t *tx_dat, uint8_t tx_len, uint8_t *rx_da
 	while (!spi1_xfer_done) {		// 后续while改为信号量，不使用while阻塞
 		__WFE();
 	}
-
-	NRF_LOG_FLUSH();
 }
 
 
@@ -86,7 +81,9 @@ uint8_t W25Qxx_ReadSR(void)
 {
 	uint8_t byte_write = W25Qxx_ReadStatusReg, byte_read = 0;
 	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(&byte_write, 1, &byte_read, 1);
+	FLASH_GPIO_CS_HIGH();
 	
 	return byte_read;
 }
@@ -96,9 +93,11 @@ uint8_t W25Qxx_ReadSR(void)
 void W25Qxx_WriteSR(uint8_t dat)
 {
 	uint8_t byte_write = W25Qxx_WriteStatusReg, byte_read = 0;
-		
+	
+	FLASH_GPIO_CS_LOW();	
 	spi1_flash_Wite_Read(&byte_write, 1, &byte_read, 0);
 	spi1_flash_Wite_Read(&dat, 1, &byte_read, 0);
+	FLASH_GPIO_CS_HIGH();
 	
 }
 
@@ -107,7 +106,9 @@ void W25Qxx_Write_Enable(void)
 {
 	uint8_t byte_write = W25Qxx_WriteEnable, byte_read = 0;
 	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(&byte_write, 1, &byte_read, 0);
+	FLASH_GPIO_CS_HIGH();
 }
 
 // W25Qxx写禁止，将WEL清零
@@ -115,7 +116,9 @@ void W25Qxx_Write_Disable(void)
 {
 	uint8_t byte_write = W25Qxx_WriteDisable, byte_read = 0;
 	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(&byte_write, 1, &byte_read, 0);
+	FLASH_GPIO_CS_HIGH();
 }
 
 // 等待空闲
@@ -129,7 +132,10 @@ void W25Qxx_Power_Down(void)
 {
 	uint16_t i = 0x02FF;
 	m_tx_buf[0] = W25Qxx_PowerDown;
+	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(m_tx_buf, 1, NULL, 0);
+	FLASH_GPIO_CS_HIGH();
 	
 	while(i--);
 }
@@ -139,7 +145,10 @@ void W25Qxx_Wake_Up()
 {
 	uint16_t i = 0x02FF;
 	m_tx_buf[0] = W25Qxx_ReleasePowerDown;
+	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(m_tx_buf, 1, NULL, 0);
+	FLASH_GPIO_CS_HIGH();
 	
 	while(i--);
 }
@@ -152,8 +161,10 @@ uint16_t W25Qxx_ReadID(void)
 	m_tx_buf[1] = 0x00;
 	m_tx_buf[2] = 0x00;
 	m_tx_buf[3] = 0x00;
-		
+	
+	FLASH_GPIO_CS_LOW();	
 	spi1_flash_Wite_Read(m_tx_buf, 4, m_rx_buf, 2);
+	FLASH_GPIO_CS_HIGH();
 		
 	temp = m_rx_buf[4] << 8;
 	temp |= m_rx_buf[5];
@@ -173,7 +184,9 @@ void W25Qxx_Read(uint8_t *pBuffer, uint32_t ReadAddr, uint8_t DataLen)
 	m_tx_buf[2] = (uint8_t)(ReadAddr >> 8);
 	m_tx_buf[3] = (uint8_t)(ReadAddr);
 	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(m_tx_buf, 4, m_rx_buf, DataLen);
+	FLASH_GPIO_CS_HIGH();
 	
 	// 数据转储
 	for(i = 0; i < DataLen; i++)
@@ -189,7 +202,10 @@ void W25Qxx_Erase_Chip(void)
 	W25Qxx_Wait_Busy();
 	
 	m_tx_buf[0] = W25Qxx_ChipErase;
+	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(m_tx_buf, 1, NULL, 0);
+	FLASH_GPIO_CS_HIGH();
 	
 	W25Qxx_Wait_Busy();
 }
@@ -205,7 +221,10 @@ void W25Qxx_Erase_Sector(uint32_t Addr)
 	m_tx_buf[1] = (uint8_t)(Addr >> 16);
 	m_tx_buf[2] = (uint8_t)(Addr >> 8);
 	m_tx_buf[3] = (uint8_t)Addr;
+	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(m_tx_buf, 4, NULL, 0);
+	FLASH_GPIO_CS_HIGH();
 	
 	W25Qxx_Wait_Busy();		// 等待擦除完成
 	
@@ -222,8 +241,10 @@ void W25Qxx_Wirte_Page(uint8_t *pBuffer, uint32_t WriteAddr, uint8_t DataLen)
 	
 	W25Qxx_Write_Enable();
 	
+	FLASH_GPIO_CS_LOW();
 	spi1_flash_Wite_Read(m_tx_buf, 4, NULL, 0);
 	spi1_flash_Wite_Read(pBuffer, DataLen, NULL, 0);
+	FLASH_GPIO_CS_HIGH();
 	
 	W25Qxx_Wait_Busy();
 }
