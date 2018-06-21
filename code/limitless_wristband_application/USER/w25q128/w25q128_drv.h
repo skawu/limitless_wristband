@@ -32,5 +32,6 @@
 
 extern void spi_config(void);
 extern uint16_t W25Qxx_ReadID(void);
+extern void W25Qxx_Read(uint8_t *pBuffer, uint32_t ReadAddr, uint8_t DataLen);
 
 #endif
